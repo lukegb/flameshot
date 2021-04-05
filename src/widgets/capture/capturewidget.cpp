@@ -120,8 +120,7 @@ CaptureWidget::CaptureWidget(const uint id,
         move(currentScreen->geometry().x(), currentScreen->geometry().y());
         resize(currentScreen->size());
 #else
-        setWindowFlags(Qt::BypassWindowManagerHint | Qt::WindowStaysOnTopHint |
-                       Qt::FramelessWindowHint | Qt::Tool);
+        // Just... don't do anything.
         resize(pixmap().size());
 #endif
     }
