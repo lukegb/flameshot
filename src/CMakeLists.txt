@@ -129,6 +129,7 @@ target_include_directories(
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external/singleapplication/>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../external/Qt-Color-Widgets/include>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../dbus/>
+         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../systemd/>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/cli>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/config>
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/core>
@@ -243,6 +244,9 @@ configure_file(${CMAKE_SOURCE_DIR}/data/dbus/org.flameshot.Flameshot.xml
 configure_file(${CMAKE_SOURCE_DIR}/data/dbus/org.flameshot.Flameshot.service.in
         ${CMAKE_CURRENT_BINARY_DIR}/share/dbus-1/services/org.flameshot.Flameshot.service)
 
+configure_file(${CMAKE_SOURCE_DIR}/data/systemd/flameshot.service.in
+        ${CMAKE_CURRENT_BINARY_DIR}/etc/systemd/user/flameshot.service)
+
 # Install man pages
 configure_file(${CMAKE_SOURCE_DIR}/data/man/man1/flameshot.1
         ${CMAKE_CURRENT_BINARY_DIR}/share/man/man1/flameshot.1 COPYONLY)
@@ -269,6 +273,7 @@ configure_file(${CMAKE_SOURCE_DIR}/data/img/hicolor/scalable/apps/flameshot.svg
 
 # Install assets
 install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/share/ DESTINATION ${CMAKE_INSTALL_DATAROOTDIR})
+install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/etc/ DESTINATION ${CMAKE_INSTALL_SYSCONFDIR})
 
 # Install Translations
 install(FILES ${QM_FILES} DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/flameshot/translations)

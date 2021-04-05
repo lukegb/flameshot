@@ -1,0 +1,6 @@
+[Unit]
+Description=Flameshot screenshot utility
+
+[Service]
+BusName=org.flameshot.Flameshot
+ExecStart=${CMAKE_INSTALL_FULL_BINDIR}/flameshot
