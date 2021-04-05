@@ -15,6 +15,13 @@ target_sources(
 )
 target_sources(
   flameshot
+        PRIVATE fup/fupuploader.h
+        fup/fupuploadertool.h
+        fup/fupuploader.cpp
+        fup/fupuploadertool.cpp
+)
+target_sources(
+  flameshot
   PRIVATE launcher/applaunchertool.h
           launcher/applauncherwidget.h
           launcher/launcheritemdelegate.h
