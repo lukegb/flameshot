@@ -3,6 +3,7 @@ pkgs.mkShell {
   nativeBuildInputs = with pkgs; ((
     with libsForQt5; [
       qttools qtsvg qtbase
+      wrapQtAppsHook
     ]
   ) ++ [
     cmake
@@ -20,4 +21,20 @@ pkgs.mkShell {
       ];
     })
   ]);
+
+  shellHook = ''
+    for pkg in "''${qtHostPathSeen[@]}"; do
+      local pluginDir="$pkg/''${qtPluginPrefix:?}"
+      if [ -d "$pluginDir" ]
+      then
+        export QT_PLUGIN_PATH="$pluginDir"''${QT_PLUGIN_PATH:+':'}$QT_PLUGIN_PATH
+      fi
+
+      local qmlDir="$pkg/''${qtQmlPrefix:?}"
+      if [ -d "$qmlDir" ]
+      then
+        export QML2_IMPORT_PATH="$pluginDir"''${QML2_IMPORT_PATH:+':'}$QML2_IMPORT_PATH
+      fi
+    done
+  '';
 }
